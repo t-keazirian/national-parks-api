@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>National Park Finder</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>National Park Finder</h1>
+
+    <p>Enter a state (or multiple states) below with their two-character state code.</p>
+    <p>Option to add a search term, along with your state(s).</p>
+
+      <form id="js-form">
+
+        <label for="state-code">State Code (comma for multiple states)</label>
+        <input type="text" name="state-code" id="js-state-code" class="state-code" required>
+
+        <label for="search-term">Search Term</label>
+        <input type="text" name="search-term" id="js-search-term" class="search-term">
+
+        <label for="max-results">Maxiumum results to display</label>
+        <input type="number" name="max-results" id="js-max-results" value="10" required>
+
+        <input type="submit" value="Show Me My Parks!" class="submit-button">
+
+      </form>
+
+       <p id="js-error-message" class="error-message"></p>
+
+        <section id="results" class="hidden">
+          <h2>Search results</h2>
+          <ul id="results-list">
+          </ul>
+        </section>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>
