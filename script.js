@@ -4,23 +4,28 @@ const apiKey = 'fhUAhUKEXcbCy5A8RtsmVQCC7tmRDtyCx9ujlA8h';
 
 const searchURL = 'https://developer.nps.gov/api/v1/';
 
+// all state codes to ensure user enters a valid state code
 const stateCodes = [
 "al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok" ,"or", "pa", "ri", "sc", "sd", "tn", "ut", "vt", "wa", "wi", "wy"
 ];
 
+// function to format the search parameters for API
 function formatSearchParams(params) {
   const queryItems = Object.keys(params)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   return queryItems.join('&');
 }
 
+// HTML to render in DOM to display all parks with their info, and the "show campgrounds" button
 function displayParksResults(responseJson, parkCode) {
   $('#results-list').empty();
 
   console.log(responseJson);
 
+  // display how many parks total from API
   $('#search-header').append(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
+  // loop through response data to get info about each park
   for (let i = 0; i < responseJson.data.length; i++) {
   $('#results-list').append(
       `<li>
@@ -37,7 +42,7 @@ function displayParksResults(responseJson, parkCode) {
         <p id="camp-err-message" class="error-message"></p>
 
         <section id="campgrounds-${responseJson.data[i].parkCode}" class="hidden">
-          <h2 id="camps-list-header" class="hidden">Campgrounds List:</h2>
+          <h3 id="camps-list-header" class="hidden">Campgrounds List:</h3>
           <ul id="camps-list-${responseJson.data[i].parkCode}">
           </ul>
         </section>`);
@@ -46,6 +51,7 @@ function displayParksResults(responseJson, parkCode) {
   handleCampBtn();
 };
 
+// HTML to render in DOM to display all campgrounds info corresponding to each park (display underneath park info)
 function displayCampgrounds(responseJson, parkCode) {
   console.log(`displayCampgrounds ran`);
   console.log(responseJson);
@@ -64,10 +70,10 @@ function displayCampgrounds(responseJson, parkCode) {
       $('#camps-list-header').addClass('hidden');
     };
 
+    // loop through campgrounds data and render info in DOM
   for (let i = 0; i < responseJson.data.length; i++) {
     
-      // let currentCampNum = responseJson.data[i];
-      console.log(i+1);
+      // console.log(i+1);
 
       $(`#camps-list-${parkCode}`).append(
         `<li>
@@ -93,6 +99,7 @@ function displayCampgrounds(responseJson, parkCode) {
   $('#camps-list-header').removeClass('hidden');
 };
 
+// format parks URL from API, takes in search parameters
 function getParks(stateCode, searchTerm, limit) {
   const params = {
     api_key: apiKey,
@@ -100,6 +107,7 @@ function getParks(stateCode, searchTerm, limit) {
     stateCode: stateCode
   };
 
+  // if search term is not empty, include that as a parameter
   if (searchTerm !== '') {
     params.q = searchTerm;
   }
@@ -110,6 +118,7 @@ function getParks(stateCode, searchTerm, limit) {
 
    console.log(parksUrl); 
 
+  //  check if state code entered is valid (compare to stateCodes array)
   if (stateCodes.includes(stateCode)) {
     fetch(parksUrl)
       .then(response => {
@@ -130,6 +139,7 @@ function getParks(stateCode, searchTerm, limit) {
 };
 }
 
+// get campgrounds information from API
 function getCampgrounds(parkCode) {
   const campParams = {
     api_key: apiKey,
@@ -155,6 +165,7 @@ function getCampgrounds(parkCode) {
     })
 }
 
+// handle "show campgrounds" button click
 function handleCampBtn() {
   $('.camp-btn').on('click', function() {
     const parkCode = $(this).attr("value");
@@ -165,6 +176,7 @@ function handleCampBtn() {
   });
 }
 
+// handle form submission (Show Parks button)
 function handleForm() {
   $('form').submit(event => {
     event.preventDefault();
@@ -179,6 +191,7 @@ function handleForm() {
   });
 }
 
+// call back function
 $(function() {
   console.log('App has loaded. Waiting for click!');
   handleForm();
