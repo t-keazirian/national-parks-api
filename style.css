@@ -71,3 +71,7 @@ li {
 input[type="number"] {
    width:50px;
 }
+
+.no-camps {
+  color: red;
+}
