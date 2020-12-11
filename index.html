@@ -4,27 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>National Park Finder</title>
+    <title>National Park and Campgrounds Finder</title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="container">
-    <h1>National Park Finder</h1>
+    <header>
+      <h1>National Park and Campgrounds Finder</h1>
+    </header>
 
-    <p>Enter a state (or multiple states) below with their two-character state code.</p>
-    <p>Option to add a search term, along with your state(s).</p>
+    <div class="intro">
+      <p>Do you want to get away during quarantine?  2020 has been tough, but exploring the great outdoors might be just what you need!</p>
+
+      <p>Get your hiking boots and camping gear, and pack up for a socially distanced National Parks Getaway!</p>
+
+      <p>Use this search tool to find the National Parks within a state you'd like to visit.  Once you find a park you'd like to explore, you can display the list of campgrounds available for that park.</p>
+
+      <p>Enter a state below with its two-character state code to get started:</p>
+    </div>
 
       <form id="js-form">
 
-        <label for="state-code">State Code (comma for multiple states)</label>
+        <label for="state-code">State Code</label>
         <input type="text" name="state-code" id="js-state-code" class="state-code" required>
 
-        <label for="search-term">Search Term</label>
+      <section class="invalid-code"></section>
+
+        <label for="search-term">Search Term (optional)</label>
         <input type="text" name="search-term" id="js-search-term" class="search-term">
 
-        <label for="max-results">Maxiumum results to display</label>
+        <label for="max-results">Maximum results to display</label>
         <input type="number" name="max-results" id="js-max-results" value="10" required>
 
         <input type="submit" value="Show Me My Parks!" class="submit-button">
@@ -34,7 +45,7 @@
        <p id="js-error-message" class="error-message"></p>
 
         <section id="results" class="hidden">
-          <h2>Search results</h2>
+          <h2 id="search-header">Search Results:</h2>
           <ul id="results-list">
           </ul>
         </section>
