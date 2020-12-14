@@ -72,6 +72,6 @@ input[type="number"] {
    width:50px;
 }
 
-.no-camps {
+.no-camps, .invalid-code {
   color: red;
 }

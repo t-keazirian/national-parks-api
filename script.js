@@ -6,7 +6,7 @@ const searchURL = 'https://developer.nps.gov/api/v1/';
 
 // all state codes to ensure user enters a valid state code
 const stateCodes = [
-"al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok" ,"or", "pa", "ri", "sc", "sd", "tn", "ut", "vt", "wa", "wi", "wy"
+"al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok" ,"or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy"
 ];
 
 // function to format the search parameters for API
@@ -16,14 +16,41 @@ function formatSearchParams(params) {
   return queryItems.join('&');
 }
 
-// HTML to render in DOM to display all parks with their info, and the "show campgrounds" button
-function displayParksResults(responseJson, parkCode) {
+// create address template to pass through displayParks, taking into account if there is no address in the responseJson data
+function addressTemplate(data) {
+
+  let line1 = '';
+  let city = '';
+  let stateCode = '';
+  let postalCode = '';
+
+  if (data.addresses.length > 0) {
+    line1 = data.addresses[0].line1;
+    city = data.addresses[0].city;
+    stateCode = data.addresses[0].stateCode;
+    postalCode = data.addresses[0].postalCode;
+  } else {
+    return `
+      <p>There is no address to display for this park.</p>
+    `
+  }
+
+  return (
+    `<h3 class="address">Address:</h3>
+    <li>${line1}</li>
+    <li>${city}, ${stateCode} ${postalCode}</li>`
+  )
+}
+
+
+// HTML to render in DOM to display all parks with their info, and the "show campgrounds" button below each park
+function displayParksResults(responseJson) {
   $('#results-list').empty();
 
   console.log(responseJson);
 
-  // display how many parks total from API
-  $('#search-header').append(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
+  // display how many parks total from API (but will only display the amount requested in max results)
+  $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
   // loop through response data to get info about each park
   for (let i = 0; i < responseJson.data.length; i++) {
@@ -33,23 +60,21 @@ function displayParksResults(responseJson, parkCode) {
       <p>${responseJson.data[i].description}</p>
       </li>
 
-        <h3 class="address">Address:</h3>
-        <li>${responseJson.data[i].addresses[0].line1}</li>
-        <li>${responseJson.data[i].addresses[0].city}, ${responseJson.data[i].addresses[0].stateCode} ${responseJson.data[i].addresses[0].postalCode}</li>
+        ${addressTemplate(responseJson.data[i])}
         
         <button type="button" class="camp-btn" value="${responseJson.data[i].parkCode}">Show Campgrounds</button>
         
-        <p id="camp-err-message" class="error-message"></p>
+        <p id="camps-err-message-${responseJson.data[i].parkCode}" class="error-message"></p>
 
         <section id="campgrounds-${responseJson.data[i].parkCode}" class="hidden">
-          <h3 id="camps-list-header" class="hidden">Campgrounds List:</h3>
+          <h3 id="camps-list-header-${responseJson.data[i].parkCode}" class="hidden">Campgrounds List:</h3>
           <ul id="camps-list-${responseJson.data[i].parkCode}">
           </ul>
         </section>`);
     };
   $('#results').removeClass('hidden');
   handleCampBtn();
-};
+}
 
 // HTML to render in DOM to display all campgrounds info corresponding to each park (display underneath park info)
 function displayCampgrounds(responseJson, parkCode) {
@@ -63,41 +88,40 @@ function displayCampgrounds(responseJson, parkCode) {
     if (total === "0") {
     let noCamps = '';
       noCamps = `<p class="no-camps" class="hidden">Sorry, there are no campgrounds in this park. Please try a different park!</p>`;
-      $(`#camps-list-${parkCode}`).append(
+      $(`#camps-list-${parkCode}`).html(
         `<li>${noCamps}</li>`
       );
       $('.no-camps').removeClass('hidden');
-      $('#camps-list-header').addClass('hidden');
+      $(`#camps-list-header-${parkCode}`).addClass('hidden');
+    } else {
+      $(`#camps-list-header-${parkCode}`).removeClass('hidden');
     };
 
     // loop through campgrounds data and render info in DOM
   for (let i = 0; i < responseJson.data.length; i++) {
-    
-      // console.log(i+1);
 
-      $(`#camps-list-${parkCode}`).append(
-        `<li>
+    $(`#camps-list-${parkCode}`).append(
+      `<li>
 
-          <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].name}</a></h3>
+        <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].name}</a></h3>
 
-          <p class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</p>
+        <p class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</p>
 
-          <img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText} width="300" height="300">
+        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText} width="300" height="300">` : `<p>No image available.</p>`}
 
-          <h4>Description:</h4>
-            <p>${responseJson.data[i].description}</p>
-          <h4>Directions Information:</h4>
-            <p>${responseJson.data[i].directionsOverview}</p>
+        <h4>Description:</h4>
+          <p>${responseJson.data[i].description}</p>
+        <h4>Directions Information:</h4>
+          <p>${responseJson.data[i].directionsOverview}</p>
 
-          <h4>Total Campsites: </h4> 
-            <p>${responseJson.data[i].campsites.totalSites}</p>
+        <h4>Total Campsites: </h4> 
+          <p>${responseJson.data[i].campsites.totalSites}</p>
 
-        </li>`
-      );
-    };
+      </li>`
+    );
+  };
   $(`#campgrounds-${parkCode}`).removeClass('hidden');
-  $('#camps-list-header').removeClass('hidden');
-};
+}
 
 // format parks URL from API, takes in search parameters
 function getParks(stateCode, searchTerm, limit) {
@@ -134,7 +158,8 @@ function getParks(stateCode, searchTerm, limit) {
     $('.invalid-code').hide();
     $('#results').removeClass('hidden');
   } else {
-    $('.invalid-code').append(`</p>Please choose a valid two-character state code and try again! Refer to <a href="https://abbreviations.yourdictionary.com/articles/state-abbrev.html" target="_blank">this list</a> for all US state codes.</p>`);
+    $('.invalid-code').show();
+    $('.invalid-code').html(`</p>Please choose a valid two-character state code and try again! Refer to <a href="https://abbreviations.yourdictionary.com/articles/state-abbrev.html" target="_blank">this list</a> for all US state codes.</p>`);
     $('#results').addClass('hidden');
 };
 }
@@ -161,16 +186,16 @@ function getCampgrounds(parkCode) {
     })
     .then(responseJson => displayCampgrounds(responseJson, parkCode))
     .catch(err => {
-      $('#camps-err-message').text(`Something went wrong: ${err.message}`)
+      $(`#camps-err-message-${parkCode}`).text(`Something went wrong: ${err.message}`)
     })
 }
 
 // handle "show campgrounds" button click
 function handleCampBtn() {
-  $('.camp-btn').on('click', function() {
+  $('.camp-btn').one('click', function() {
     const parkCode = $(this).attr("value");
 
-    console.log(parkCode);
+    // console.log(parkCode);
 
     getCampgrounds(parkCode);
   });
@@ -195,32 +220,4 @@ function handleForm() {
 $(function() {
   console.log('App has loaded. Waiting for click!');
   handleForm();
-});
-
-// There needs to be #camps_lists section near each button in parks result list, but it needs named something like #camps_lists1 or #camps_list_yellowstone
-
-// then append to that one when that park's button is clicked
-
-// Well, you have a choice - only one section in the html to display results
-
-// or a section with each park that is added to the dom in displayParksResults
-
-// I think one global campground section would be fine if you put it over on the left or right side
-
-// so that it is visible
-
-// and then have your displaycampgrounds function modify that section's html instead of appending ot it so that the previous campground data is overwritten
-
-// under the button, put an html section whose id is something like camps_list_parkcode, where the parkcode is the actual parkcode
-
-// then have getCampgrounds also pass the parkCode as a parameter to displayCampgrounds
-
-// In displayCampgrounds append to / overwrite the html of camps_list_parkcode
-
-// So once you get that park code, you can use it to identify the `<li>` that the whole park is being wrapped inside.
-
-// So then you should have constructed the `<li>` for each park as `<li id=<park code> />`
-
-// and then use $('park code') to location that <li>
-
-// and then append the campground info there.
+})
