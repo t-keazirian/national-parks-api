@@ -16,8 +16,15 @@ h3 {
   text-align: center;
 }
 
-h3 {
+.address {
+  display: flex;
   padding-bottom: 0px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.address-list {
+  margin-bottom: 5px;
 }
 
 form {
@@ -52,26 +59,18 @@ li {
   margin: 0 auto;
 }
 
-.error-message {
-    color: red;
-}
-
 .hidden {
   display: none;
 }
 
-.state-code {
-  width: 100px;
+.state-dropdown {
+  width: 120px;
 }
 
 .search-term {
   width: 100px;
 }
 
-input[type="number"] {
-   width:50px;
-}
-
-.no-camps, .invalid-code {
+.no-camps, .invalid-code, .error-message {
   color: red;
 }

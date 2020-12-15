@@ -5,9 +5,9 @@ const apiKey = 'fhUAhUKEXcbCy5A8RtsmVQCC7tmRDtyCx9ujlA8h';
 const searchURL = 'https://developer.nps.gov/api/v1/';
 
 // all state codes to ensure user enters a valid state code
-const stateCodes = [
-"al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok" ,"or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy"
-];
+// const stateCodes = [
+// "al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok" ,"or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy"
+// ];
 
 // function to format the search parameters for API
 function formatSearchParams(params) {
@@ -36,9 +36,11 @@ function addressTemplate(data) {
   }
 
   return (
-    `<h3 class="address">Address:</h3>
+    `<h4 class="address">Address:</h4>
+    <ul class="address-list">
     <li>${line1}</li>
-    <li>${city}, ${stateCode} ${postalCode}</li>`
+    <li>${city}, ${stateCode} ${postalCode}</li>
+    </ul>`
   )
 }
 
@@ -57,6 +59,7 @@ function displayParksResults(responseJson) {
   $('#results-list').append(
       `<li>
       <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].fullName}</a></h3>
+      <h4 class="park-num">Park ${i+1} of ${responseJson.data.length}</h4>
       <p>${responseJson.data[i].description}</p>
       </li>
 
@@ -145,26 +148,40 @@ function getParks(stateCode, searchTerm) {
   console.log(parksUrl); 
 
   //  check if state code entered is valid (compare to stateCodes array)
-  if (stateCodes.includes(stateCode)) {
-    fetch(parksUrl)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(response.statusText);
-      })
-      .then(responseJson => displayParksResults(responseJson))
-      .catch(err => {
-        $('#js-error-message').text(`Something went wrong: ${err.message}`);
-      });
-    $('.invalid-code').hide();
-    $('#results').removeClass('hidden');
-  } else {
-    $('.invalid-code').show();
-    $('.invalid-code').html(`</p>Please choose a valid two-character state code and try again! Refer to <a href="https://abbreviations.yourdictionary.com/articles/state-abbrev.html" target="_blank">this list</a> for all US state codes.</p>`);
-    $('#results').addClass('hidden');
+//   if (stateCodes.includes(stateCode)) {
+//     fetch(parksUrl)
+//       .then(response => {
+//         if (response.ok) {
+//           return response.json();
+//         }
+//         throw new Error(response.statusText);
+//       })
+//       .then(responseJson => displayParksResults(responseJson))
+//       .catch(err => {
+//         $('#js-error-message').text(`Something went wrong: ${err.message}`);
+//       });
+//     $('.invalid-code').hide();
+//     $('#results').removeClass('hidden');
+//   } else {
+//     $('.invalid-code').show();
+//     $('.invalid-code').html(`</p>Please choose a valid two-character state code and try again!</p>`);
+//     $('#results').addClass('hidden');
+// };
+
+  fetch(parksUrl)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(responseJson => displayParksResults(responseJson))
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
+  $('#results').removeClass('hidden');
 };
-}
+
 
 // get campgrounds information from API 
 function getCampgrounds(parkCode) {
@@ -207,9 +224,9 @@ function handleForm() {
   $('form').submit(event => {
     event.preventDefault();
 
-    const stateCode = $('#js-state-code').val();
+    const stateCode = $('#js-states-list').val();
 
-    const searchTerm = $('#js-search-term').val();
+    const searchTerm = $('#js-search-term').val().toLowerCase();
     getParks(stateCode, searchTerm);
   });
 }
