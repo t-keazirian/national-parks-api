@@ -49,7 +49,7 @@ function displayParksResults(responseJson) {
 
   console.log(responseJson);
 
-  // display how many parks total from API (but will only display the amount requested in max results)
+  // display how many parks total from API (will only display the amount requested in max results)
   $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
   // loop through response data to get info about each park
@@ -107,12 +107,15 @@ function displayCampgrounds(responseJson, parkCode) {
 
         <p class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</p>
 
-        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText} width="300" height="300">` : `<p>No image available.</p>`}
+        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<p>No image available.</p>`}
 
         <h4>Description:</h4>
           <p>${responseJson.data[i].description}</p>
         <h4>Directions Information:</h4>
           <p>${responseJson.data[i].directionsOverview}</p>
+
+        <h4>Reservation Info:</h4>
+          <p>${responseJson.data[i].reservationInfo}</p>
 
         <h4>Total Campsites: </h4> 
           <p>${responseJson.data[i].campsites.totalSites}</p>
@@ -124,10 +127,9 @@ function displayCampgrounds(responseJson, parkCode) {
 }
 
 // format parks URL from API, takes in search parameters
-function getParks(stateCode, searchTerm, limit) {
+function getParks(stateCode, searchTerm) {
   const params = {
     api_key: apiKey,
-    limit: limit,
     stateCode: stateCode
   };
 
@@ -140,7 +142,7 @@ function getParks(stateCode, searchTerm, limit) {
 
   let parksUrl = searchURL + 'parks?' + queryString;
 
-   console.log(parksUrl); 
+  console.log(parksUrl); 
 
   //  check if state code entered is valid (compare to stateCodes array)
   if (stateCodes.includes(stateCode)) {
@@ -164,7 +166,7 @@ function getParks(stateCode, searchTerm, limit) {
 };
 }
 
-// get campgrounds information from API
+// get campgrounds information from API 
 function getCampgrounds(parkCode) {
   const campParams = {
     api_key: apiKey,
@@ -195,24 +197,20 @@ function handleCampBtn() {
   $('.camp-btn').one('click', function() {
     const parkCode = $(this).attr("value");
 
-    // console.log(parkCode);
-
     getCampgrounds(parkCode);
   });
 }
 
 // handle form submission (Show Parks button)
 function handleForm() {
+  
   $('form').submit(event => {
     event.preventDefault();
 
     const stateCode = $('#js-state-code').val();
 
     const searchTerm = $('#js-search-term').val();
-
-    const limit = $('#js-max-results').val();
-
-    getParks(stateCode, searchTerm, limit);
+    getParks(stateCode, searchTerm);
   });
 }
 
