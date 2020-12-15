@@ -113,12 +113,16 @@ function displayCampgrounds(responseJson, parkCode) {
         ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<p>No image available.</p>`}
 
         <h4>Description:</h4>
-          <p>${responseJson.data[i].description}</p>
+          <p>${responseJson.data[i].description}</p> 
+
         <h4>Directions Information:</h4>
-          <p>${responseJson.data[i].directionsOverview}</p>
+
+          ${responseJson.data[i].directionsOverview !== '' ? `<p>${responseJson.data[i].directionsOverview}</p>` : `<p>No directions information available.</p>`}
 
         <h4>Reservation Info:</h4>
-          <p>${responseJson.data[i].reservationInfo}</p>
+          
+
+          ${responseJson.data[i].reservationInfo !== '' ? `<p>${responseJson.data[i].reservationInfo}</p>` : `<p>No reservation information available.</p>`}
 
         <h4>Total Campsites: </h4> 
           <p>${responseJson.data[i].campsites.totalSites}</p>
