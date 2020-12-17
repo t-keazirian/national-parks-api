@@ -74,3 +74,12 @@ li {
 .no-camps, .invalid-code, .error-message {
   color: red;
 }
+
+@media all and (min-width: 800px) {
+  section {
+    padding: 0 10%;
+  }
+  .group {
+    flex-direction: row;
+  }
+}
