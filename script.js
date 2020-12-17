@@ -54,7 +54,6 @@ function displayParksResults(responseJson) {
   // display how many parks total from API (will only display the amount requested in max results)
   $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
-  // loop through response data to get info about each park
   for (let i = 0; i < responseJson.data.length; i++) {
   $('#results-list').append(
       `<li>
@@ -100,7 +99,6 @@ function displayCampgrounds(responseJson, parkCode) {
       $(`#camps-list-header-${parkCode}`).removeClass('hidden');
     };
 
-    // loop through campgrounds data and render info in DOM
   for (let i = 0; i < responseJson.data.length; i++) {
 
     $(`#camps-list-${parkCode}`).append(
@@ -187,7 +185,7 @@ function getParks(stateCode, searchTerm) {
 };
 
 
-// get campgrounds information from API 
+// get campgrounds information from camps API 
 function getCampgrounds(parkCode) {
   const campParams = {
     api_key: apiKey,
