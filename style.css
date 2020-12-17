@@ -52,8 +52,10 @@ html {
   border-style: solid;
   margin: 10px;
   border-radius: 10px;
-  /* max-height: 200px; */
   text-align: justify;
+  /* width: fit-content; */
+  /* flex-shrink: 0; */
+  /* max-height: 200px; */
   /* width: fit-content; */
 }
 
@@ -69,16 +71,17 @@ html {
   background-color: #DCECF9;
   border-style: solid;
   padding: 10px;
+  margin: 10px;
   /* margin: 10px; */
   border-radius: 10px;
-  min-height: 100%;
+  /* min-height: 100%; */
   width: 100%;
-  /* max-height: 200px; */
+  max-height: 200px;
 }
 
 .parks-results {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   background-color: #DCECF9;
   border-style: solid;
   border-radius: 10px;
@@ -91,7 +94,7 @@ html {
 }
 
 .item-double {
-  flex: 3;
+  flex: 2;
 }
 
 .container {
