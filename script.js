@@ -111,7 +111,7 @@ function displayCampgrounds(responseJson, parkCode) {
 
         <h4 class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</h4>
 
-        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<p>No image available.</p>`}
+        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<img class="no-image" src="images/no-image-available-icon.jpg" alt="no image available" width="200" height="200">`}
 
         <h4>Description:</h4>
           <p>${responseJson.data[i].description}</p> 
@@ -120,7 +120,7 @@ function displayCampgrounds(responseJson, parkCode) {
 
           ${responseJson.data[i].directionsOverview !== '' ? `<p>${responseJson.data[i].directionsOverview}</p>` : `<p>No directions information available.</p>`}
 
-        <h4>Reservation Info:</h4>
+        <h4>Reservation Information:</h4>
           
 
           ${responseJson.data[i].reservationInfo !== '' ? `<p>${responseJson.data[i].reservationInfo}</p>` : `<p>No reservation information available.</p>`}
