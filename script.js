@@ -56,23 +56,26 @@ function displayParksResults(responseJson) {
 
   for (let i = 0; i < responseJson.data.length; i++) {
   $('#results-list').append(
-      `<li>
-      <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].fullName}</a></h3>
-      <h4 class="park-num">Park ${i+1} of ${responseJson.data.length}</h4>
-      <p>${responseJson.data[i].description}</p>
-      </li>
+      `<section class="park-list">
+        <li>
+          <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].fullName}</a></h3>
+          <h4 class="park-num">Park ${i+1} of ${responseJson.data.length}</h4>
+          <p>${responseJson.data[i].description}</p>
+          </li>
 
-        ${addressTemplate(responseJson.data[i])}
-        
-        <button type="button" class="camp-btn" value="${responseJson.data[i].parkCode}">Show Campgrounds</button>
-        
-        <p id="camps-err-message-${responseJson.data[i].parkCode}" class="error-message"></p>
+          ${addressTemplate(responseJson.data[i])}
+            
+          <button type="button" class="camp-btn" value="${responseJson.data[i].parkCode}">Show Campgrounds</button>
+            
+          <p id="camps-err-message-${responseJson.data[i].parkCode}" class="error-message"></p>
 
-        <section id="campgrounds-${responseJson.data[i].parkCode}" class="hidden">
-          <h3 id="camps-list-header-${responseJson.data[i].parkCode}" class="hidden">Campgrounds List:</h3>
-          <ul id="camps-list-${responseJson.data[i].parkCode}">
-          </ul>
-        </section>`);
+          <section id="campgrounds-${responseJson.data[i].parkCode}" class="hidden">
+            <h3 id="camps-list-header-${responseJson.data[i].parkCode}" class="hidden camp-header">Campgrounds List:</h3>
+            <ul id="camps-list-${responseJson.data[i].parkCode}">
+            </ul>
+          </section>
+      </section>
+        `);
     };
   $('#results').removeClass('hidden');
   handleCampBtn();
@@ -106,7 +109,7 @@ function displayCampgrounds(responseJson, parkCode) {
 
         <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].name}</a></h3>
 
-        <p class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</p>
+        <h4 class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</h4>
 
         ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<p>No image available.</p>`}
 

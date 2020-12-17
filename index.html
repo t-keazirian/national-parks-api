@@ -12,29 +12,28 @@
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>
-        <!-- link to site in title at the top to reload the page when clicked -->
-        <a href="https://t-keazirian.github.io/national-parks-api/">National Parks and Campgrounds Finder</a>
-       </h1>
-    </header>
+  <header>
+    <h1>
+      <!-- link to site in title at the top to reload the page when clicked -->
+      <a href="https://t-keazirian.github.io/national-parks-api/">National Parks and Campgrounds Finder</a>
+    </h1>
 
-    <div class="intro">
-      <p>Do you want to get away during quarantine?  2020 has been rough, and exploring the great outdoors might be just what you need!</p>
+    <!-- <button class="reset-btn">Reset Search</button> -->
+  </header>
+
+  <div class="container">
+
+    <div class="intro item item-double">
 
       <p>Get your hiking boots and gear.  Pack up for a socially distanced National Parks getaway!  Refer to <a href="https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/visitors.html" target="_blank">this CDC resource</a> for guidelines and restrictions when visiting parks and camping facilities.</p>
 
-      <p>Use this search tool to find the National Parks within a state you'd like to visit.  Feel free to add an optional search term to narrow down your findings.</p>
-      
-      <p>Once you find a park you'd like to explore, just click on the button that says "Show Campgrounds" to pull up a list of campgrounds available for that park.</p>
+      <p>Use this search tool to find the National Parks within a state you'd like to visit.  Feel free to add an optional search term to narrow down your findings.  Once you find a park you'd like to explore, just click on the button that says "Show Campgrounds" to pull up a list of campgrounds available for that park.</p>
 
     </div>
 
-      <form id="js-form">
+    <div class="item">
 
-        <!-- <label for="state-code">State Code</label>
-        <input type="text" name="state-code" id="js-state-code" class="state-code" maxlength = "2" required> -->
+      <form id="js-form" class="search-form">
 
         <label for="state-code">Choose a state below:</label>
         <select name="state-code" class="state-dropdown" id="js-states-list">
@@ -92,25 +91,28 @@
           <option value="wy">Wyoming</option>
    
         </select>
-
-        <!-- <section class="invalid-code"></section> -->
-
+        
         <label for="search-term">Search Term (optional)</label>
         <input type="text" name="search-term" id="js-search-term" class="search-term">
-
+        
         <input type="submit" value="Show Me My Parks!" class="submit-button">
-
+      
       </form>
-
-       <p id="js-error-message" class="error-message"></p>
-
-        <section id="results" class="hidden">
-          <h3 id="search-header"></h3>
-          <ul id="results-list">
-          </ul>
-        </section>
+      
+    </div>
 
   </div>
+        
+  <div class="search-results">
+    <p id="js-error-message" class="error-message"></p>
+
+     <section id="results" class="hidden parks-results">
+       <h3 id="search-header"></h3>
+       <ul id="results-list">
+       </ul>
+     </section>
+  </div>  
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="script.js"></script>
