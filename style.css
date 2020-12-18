@@ -4,21 +4,15 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
 }
 
 header {
-  display: flex;
-  align-content: center;
   background-color: #DCECF9;
   border-style: solid;
   margin: 10px;
   border-radius: 10px;
-}
-
-h1 a {
-  /* display: flex; */
   font-family: Trebuchet MS;
-  font-size: 40px;
   text-align: center;
 }
 
@@ -30,9 +24,8 @@ h2, h3, h4 {
 html {
   background-image: url(images/IMG_1712.jpg);
   background-repeat: no-repeat;
-  background-size: 100%;
   background-size: cover;
-  /* background: lightblue; */
+  background-attachment: fixed;
 }
 
 .camp-img, .no-image {
@@ -42,12 +35,9 @@ html {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-
 }
 
 .intro {
-  display: flex;
-  flex-direction: column;
   background-color: #DCECF9;
   padding-left: 10px;
   padding-right: 10px;
@@ -55,28 +45,24 @@ html {
   margin: 10px;
   border-radius: 10px;
   text-align: justify;
-  /* width: fit-content; */
-  /* flex-shrink: 0; */
-  /* max-height: 200px; */
-  /* width: fit-content; */
-}
-
-.intro p {
-  display: inline-block;
-  position: relative;
-  width: 100%;
 }
 
 .search-form {
   display: flex;
   flex-direction: column;
+}
+
+.intro-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro-search {
   background-color: #DCECF9;
   border-style: solid;
   padding: 10px;
   border-radius: 10px;
-  width: 100%;
-  max-height: 200px;
-  /* min-height: 100%; */
+  margin: 10px;
 }
 
 .park-results {
@@ -86,8 +72,8 @@ html {
   border-style: solid;
   border-radius: 10px;
   min-height: 100%;
-  /* width: 100%; */
   margin: 10px;
+  text-align: justify;
 }
 
 .item {
@@ -99,11 +85,7 @@ html {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 0 5%;
 }
 
 .park-list {
@@ -119,6 +101,7 @@ h3 {
 
 .address {
   display: flex;
+  padding-left: 5px;
   padding-bottom: 0px;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -188,12 +171,39 @@ button:hover, .submit-button:hover {
 	background-color:#ffab23;
 }
 
+.camp-btn {
+  margin: 5px;
+}
+
+#scroll-to-top-btn {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
+  background: blanchedalmond;
+  border: none;
+  color: black;
+  outline: none;
+  cursor: pointer;
+}
+
+#scroll-to-top-btn:active {
+  background: #D88373;
+}
 
 @media all and (min-width: 800px) {
   section {
     padding: 5px 10px 5px 10px;
   }
   .container {
+    margin: 0 15%;
+  }
+  .intro-section {
     flex-direction: row;
+  }
+  .img-container {
+    padding: 0 15%;
   }
 }

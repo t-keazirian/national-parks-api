@@ -46,7 +46,7 @@ function displayParksResults(responseJson) {
 
   console.log(responseJson);
 
-  // display how many parks total from API (will only display the amount requested in max results)
+  // display how many parks total from API
   $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
   for (let i = 0; i < responseJson.data.length; i++) {
@@ -106,7 +106,9 @@ function displayCampgrounds(responseJson, parkCode) {
 
         <h4 class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</h4>
 
-        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<img class="no-image" src="images/no-image-available-icon.jpg" alt="no image available">`}
+        <div class="img-container">
+          ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}">` : `<img class="no-image" src="images/no-image-available-icon.jpg" alt="no image available">`}
+        </div>
 
         <h4>Description:</h4>
           <p>${responseJson.data[i].description}</p> 
@@ -194,7 +196,21 @@ function handleCampBtn() {
     const parkCode = $(this).attr("value");
 
     getCampgrounds(parkCode);
+    toggleCampgrounds(parkCode);
   });
+}
+
+function toggleCampgrounds(parkCode) {
+  $('.camp-btn[value='+parkCode+']').on('click', function() {
+    
+    if ($(`#campgrounds-${parkCode}`).hasClass('hidden')) {
+      $(`#campgrounds-${parkCode}`).removeClass('hidden');
+      $(this).text('Hide Campgrounds');
+    } else {
+      $(`#campgrounds-${parkCode}`).addClass('hidden');
+      $(this).text('Show Campgrounds');
+    }
+  })
 }
 
 // handle form submission (Show Parks button)
@@ -210,8 +226,19 @@ function handleForm() {
   });
 }
 
+function scrollToTopBtnClick() {
+  $('#scroll-to-top-btn').on('click', event => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  })
+}
+
 // call back function
 $(function() {
   console.log('App has loaded. Waiting for click!');
+  scrollToTopBtnClick();
   handleForm();
 })

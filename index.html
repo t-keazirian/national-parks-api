@@ -23,96 +23,101 @@
 
   <div class="container">
 
-    <div class="intro item item-double">
+    <div class="intro-section">
 
-      <p>Get your hiking boots and gear.  Pack up for a socially distanced National Parks getaway!  Refer to <a href="https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/visitors.html" target="_blank">this CDC resource</a> for guidelines and restrictions when visiting parks and camping facilities.</p>
-
-      <p>Use this search tool to find the National Parks within a state you'd like to visit.  Feel free to add an optional search term to narrow down your findings.  Once you find a park you'd like to explore, just click on the button that says "Show Campgrounds" to pull up a list of campgrounds available for that park.</p>
-
+      <div class="intro item item-double">
+  
+        <p>Get your hiking boots and gear.  Pack up for a socially distanced National Parks getaway!  Refer to <a href="https://www.cdc.gov/coronavirus/2019-ncov/daily-life-coping/visitors.html" target="_blank">this CDC resource</a> for guidelines and restrictions when visiting parks and camping facilities.</p>
+  
+        <p>Use this search tool to find the National Parks within a state you'd like to visit.  Feel free to add an optional search term to narrow down your findings.  Once you find a park you'd like to explore, just click on the button that says "Show Campgrounds" to pull up a list of campgrounds available for that park.</p>
+  
+      </div>
+  
+      <div class="intro-search item">
+  
+        <form id="js-form" class="search-form">
+  
+          <label for="state-code">Choose a state below:</label>
+          <select name="state-code" class="state-dropdown" id="js-states-list">
+  
+            <option value="al">Alabama</option>
+            <option value="ak">Alaska</option>
+            <option value="az">Arizona</option>
+            <option value="ar">Arkansas</option>
+            <option value="ca">California</option>
+            <option value="co">Colorado</option>
+            <option value="ct">Connecticut</option>
+            <option value="de">Delaware</option>
+            <option value="dc">Washington DC</option>
+            <option value="fl">Florida</option>
+            <option value="ga">Georgia</option>
+            <option value="hi">Hawaii</option>
+            <option value="id">Idaho</option>
+            <option value="il">Illinois</option>
+            <option value="in">Indiana</option>
+            <option value="ia">Iowa</option>
+            <option value="ks">Kansas</option>
+            <option value="ky">Kentucky</option>
+            <option value="la">Louisiana</option>
+            <option value="me">Maine</option>
+            <option value="md">Maryland</option>
+            <option value="ma">Massachusetts</option>
+            <option value="mi">Michigan</option>
+            <option value="mn">Minnesota</option>
+            <option value="ms">Mississippi</option>
+            <option value="mo">Missouri</option>
+            <option value="mt">Montana</option>
+            <option value="ne">Nebraska</option>
+            <option value="nv">Nevada</option>
+            <option value="nh">New Hampshire</option>
+            <option value="nj">New Jersey</option>
+            <option value="nm">New Mexico</option>
+            <option value="ny">New York</option>
+            <option value="nc">North Carolina</option>
+            <option value="nd">North Dakota</option>
+            <option value="oh">Ohio</option>
+            <option value="ok">Oklahoma</option>
+            <option value="or">Oregon</option>
+            <option value="pa">Pennsylvania</option>
+            <option value="ri">Rhode Island</option>
+            <option value="sc">South Carolina</option>
+            <option value="sd">South Dakota</option>
+            <option value="tn">Tennessee</option>
+            <option value="tx">Texas</option>
+            <option value="ut">Utah</option>
+            <option value="vt">Vermont</option>
+            <option value="va">Virginia</option>
+            <option value="wa">Washington</option>
+            <option value="wv">West Virginia</option>
+            <option value="wi">Wisconsin</option>
+            <option value="wy">Wyoming</option>
+     
+          </select>
+          
+          <label for="search-term">Search Term (optional)</label>
+          <input type="text" name="search-term" id="js-search-term" class="search-term">
+          
+          <input type="submit" value="Show Me My Parks!" class="submit-button">
+        
+        </form>
+        
+      </div>
     </div>
 
-    <div class="item">
-
-      <form id="js-form" class="search-form">
-
-        <label for="state-code">Choose a state below:</label>
-        <select name="state-code" class="state-dropdown" id="js-states-list">
-
-          <option value="al">Alabama</option>
-          <option value="ak">Alaska</option>
-          <option value="az">Arizona</option>
-          <option value="ar">Arkansas</option>
-          <option value="ca">California</option>
-          <option value="co">Colorado</option>
-          <option value="ct">Connecticut</option>
-          <option value="de">Delaware</option>
-          <option value="dc">Washington DC</option>
-          <option value="fl">Florida</option>
-          <option value="ga">Georgia</option>
-          <option value="hi">Hawaii</option>
-          <option value="id">Idaho</option>
-          <option value="il">Illinois</option>
-          <option value="in">Indiana</option>
-          <option value="ia">Iowa</option>
-          <option value="ks">Kansas</option>
-          <option value="ky">Kentucky</option>
-          <option value="la">Louisiana</option>
-          <option value="me">Maine</option>
-          <option value="md">Maryland</option>
-          <option value="ma">Massachusetts</option>
-          <option value="mi">Michigan</option>
-          <option value="mn">Minnesota</option>
-          <option value="ms">Mississippi</option>
-          <option value="mo">Missouri</option>
-          <option value="mt">Montana</option>
-          <option value="ne">Nebraska</option>
-          <option value="nv">Nevada</option>
-          <option value="nh">New Hampshire</option>
-          <option value="nj">New Jersey</option>
-          <option value="nm">New Mexico</option>
-          <option value="ny">New York</option>
-          <option value="nc">North Carolina</option>
-          <option value="nd">North Dakota</option>
-          <option value="oh">Ohio</option>
-          <option value="ok">Oklahoma</option>
-          <option value="or">Oregon</option>
-          <option value="pa">Pennsylvania</option>
-          <option value="ri">Rhode Island</option>
-          <option value="sc">South Carolina</option>
-          <option value="sd">South Dakota</option>
-          <option value="tn">Tennessee</option>
-          <option value="tx">Texas</option>
-          <option value="ut">Utah</option>
-          <option value="vt">Vermont</option>
-          <option value="va">Virginia</option>
-          <option value="wa">Washington</option>
-          <option value="wv">West Virginia</option>
-          <option value="wi">Wisconsin</option>
-          <option value="wy">Wyoming</option>
-   
-        </select>
-        
-        <label for="search-term">Search Term (optional)</label>
-        <input type="text" name="search-term" id="js-search-term" class="search-term">
-        
-        <input type="submit" value="Show Me My Parks!" class="submit-button">
+    
+    <div class="search-results">
+      <p id="js-error-message" class="error-message"></p>
       
-      </form>
-      
-    </div>
-
+      <section id="results" class="hidden park-results">
+        <h3 id="search-header"></h3>
+        <ul id="results-list">
+        </ul>
+      </section>
+    </div>  
+    
   </div>
-        
-  <div class="search-results">
-    <p id="js-error-message" class="error-message"></p>
 
-     <section id="results" class="hidden park-results">
-       <h3 id="search-header"></h3>
-       <ul id="results-list">
-       </ul>
-     </section>
-  </div>  
-
+  <button id="scroll-to-top-btn">Scroll To Top</button>
 
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="script.js"></script>
