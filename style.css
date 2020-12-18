@@ -41,6 +41,12 @@ html {
 
 .camp-img, .no-image {
   border-radius: 10px;
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
 }
 
 .intro {
@@ -71,22 +77,21 @@ html {
   background-color: #DCECF9;
   border-style: solid;
   padding: 10px;
-  margin: 10px;
-  /* margin: 10px; */
   border-radius: 10px;
-  /* min-height: 100%; */
   width: 100%;
   max-height: 200px;
+  /* min-height: 100%; */
 }
 
-.parks-results {
+.park-results {
   display: flex;
   flex-direction: column;
   background-color: #DCECF9;
   border-style: solid;
   border-radius: 10px;
   min-height: 100%;
-  width: 100%;
+  /* width: 100%; */
+  margin: 10px;
 }
 
 .item {
@@ -100,10 +105,9 @@ html {
 .container {
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
   max-width: 600px;
   margin: 0 auto;
-  align-items: stretch;
 }
 
 .park-list {
@@ -169,7 +173,7 @@ li {
   color: red;
 }
 
-.park-num {
+.park-num, .num-of-campgrounds {
   text-align: center;
 }
 

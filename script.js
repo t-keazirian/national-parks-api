@@ -4,11 +4,6 @@ const apiKey = 'fhUAhUKEXcbCy5A8RtsmVQCC7tmRDtyCx9ujlA8h';
 
 const searchURL = 'https://developer.nps.gov/api/v1/';
 
-// all state codes to ensure user enters a valid state code
-// const stateCodes = [
-// "al", "ak", "az", "ar", "ca", "co", "ct", "de", "dc", "fl", "ga", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "oh", "ok" ,"or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv", "wi", "wy"
-// ];
-
 // function to format the search parameters for API
 function formatSearchParams(params) {
   const queryItems = Object.keys(params)
@@ -111,7 +106,7 @@ function displayCampgrounds(responseJson, parkCode) {
 
         <h4 class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</h4>
 
-        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<img class="no-image" src="images/no-image-available-icon.jpg" alt="no image available" width="200" height="200">`}
+        ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}" width="300" height="300">` : `<img class="no-image" src="images/no-image-available-icon.jpg" alt="no image available">`}
 
         <h4>Description:</h4>
           <p>${responseJson.data[i].description}</p> 
@@ -151,27 +146,6 @@ function getParks(stateCode, searchTerm) {
   let parksUrl = searchURL + 'parks?' + queryString;
 
   console.log(parksUrl); 
-
-  //  check if state code entered is valid (compare to stateCodes array)
-//   if (stateCodes.includes(stateCode)) {
-//     fetch(parksUrl)
-//       .then(response => {
-//         if (response.ok) {
-//           return response.json();
-//         }
-//         throw new Error(response.statusText);
-//       })
-//       .then(responseJson => displayParksResults(responseJson))
-//       .catch(err => {
-//         $('#js-error-message').text(`Something went wrong: ${err.message}`);
-//       });
-//     $('.invalid-code').hide();
-//     $('#results').removeClass('hidden');
-//   } else {
-//     $('.invalid-code').show();
-//     $('.invalid-code').html(`</p>Please choose a valid two-character state code and try again!</p>`);
-//     $('#results').addClass('hidden');
-// };
 
   fetch(parksUrl)
     .then(response => {
