@@ -6,9 +6,11 @@ Assignment:
 
 API Hack Capstone
 
-- search will trigger first to NPS's parks API, then to campgrounds API
-- user should be able to search for parks with a given two-character state code and optional search keyword parameter
-- once parks are loaded, user should be able to click on "show campgrounds" button to display all the campgrounds available for given park
+- Search will trigger first to NPS's parks API, then to campgrounds API
+- User can select a state from a dropdown menu
+- User has option enter a search term to narrow down the selection
+- Search will trigger a list of all the national parks in that state
+- Once parks are loaded, user can click "show campgrounds" button to display all the campgrounds available for that park
 
 Built With:
 - jQuery
@@ -19,3 +21,4 @@ Built With:
 Features:
 - Search for National Parks in a given state
 - Display campgrounds for that park
+- User will see data for both the parks and for the campgrounds, including links to the NPS's site on that park or campground, images, number of campgrounds, and details
