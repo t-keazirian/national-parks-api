@@ -102,7 +102,7 @@ function displayCampgrounds(responseJson, parkCode) {
     $(`#camps-list-${parkCode}`).append(
       `<li>
 
-        <h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].name}</a></h3>
+        ${responseJson.data[i].url !== '' ? `<h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].name}</a></h3>` : `<h3>${responseJson.data[i].name}</h3>`}
 
         <h4 class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</h4>
 
@@ -113,6 +113,9 @@ function displayCampgrounds(responseJson, parkCode) {
         <h4>Description:</h4>
           <p>${responseJson.data[i].description}</p> 
 
+        <h4>Total Campsites: </h4> 
+          <p>${responseJson.data[i].campsites.totalSites}</p>
+
         <h4>Directions Information:</h4>
 
           ${responseJson.data[i].directionsOverview !== '' ? `<p>${responseJson.data[i].directionsOverview}</p>` : `<p>No directions information available.</p>`}
@@ -121,9 +124,6 @@ function displayCampgrounds(responseJson, parkCode) {
           
 
           ${responseJson.data[i].reservationInfo !== '' ? `<p>${responseJson.data[i].reservationInfo}</p>` : `<p>No reservation information available.</p>`}
-
-        <h4>Total Campsites: </h4> 
-          <p>${responseJson.data[i].campsites.totalSites}</p>
 
       </li>`
     );
@@ -201,14 +201,16 @@ function handleCampBtn() {
 }
 
 function toggleCampgrounds(parkCode) {
-  $('.camp-btn[value='+parkCode+']').on('click', function() {
+  $('.camp-btn[value='+parkCode+']').on('click', function(event) {
     
     if ($(`#campgrounds-${parkCode}`).hasClass('hidden')) {
       $(`#campgrounds-${parkCode}`).removeClass('hidden');
-      $(this).text('Hide Campgrounds');
+      // $(`#camp-btn-${parkCode}`).text('Hide Campgrounds');
+      $(event.currentTarget).text('Hide Campgrounds');
     } else {
       $(`#campgrounds-${parkCode}`).addClass('hidden');
-      $(this).text('Show Campgrounds');
+      // $(`#camp-btn-${parkCode}`).text('Show Campgrounds');
+      $(event.currentTarget).text('Show Campgrounds');
     }
   })
 }
