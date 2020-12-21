@@ -46,7 +46,7 @@ function displayParksResults(responseJson) {
 
   console.log(responseJson);
 
-  // display how many parks total from API
+  // display total parks to display from API
   $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
   for (let i = 0; i < responseJson.data.length; i++) {
@@ -81,11 +81,11 @@ function displayCampgrounds(responseJson, parkCode) {
   console.log(`displayCampgrounds ran`);
   console.log(responseJson);
 
-    let total = responseJson.total;
+  let total = responseJson.total;
 
-    console.log(total);
+  console.log(total);
 
-    if (total === "0") {
+  if (total === "0") {
     let noCamps = '';
       noCamps = `<p class="no-camps" class="hidden">Sorry, there are no campgrounds in this park. Please try a different park!</p>`;
       $(`#camps-list-${parkCode}`).html(
@@ -215,7 +215,7 @@ function toggleCampgrounds(parkCode) {
   })
 }
 
-// handle form submission (Show Parks button)
+// handle form submission (Show Parks)
 function handleForm() {
   
   $('form').submit(event => {
