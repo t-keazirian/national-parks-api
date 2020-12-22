@@ -2,7 +2,7 @@
 
 Screenshot:
 
-[Screenshot of App](images/Screen Shot 2020-12-22 at 1.35.33 PM.png)
+![Screenshot of App](images/Screen Shot 2020-12-22 at 1.35.33 PM.png)
 
 https://t-keazirian.github.io/national-parks-api/
 
