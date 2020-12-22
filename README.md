@@ -6,7 +6,7 @@ Assignment:
 
 API Hack Capstone
 
-- Search will make GEt request NPS's API, parks endpoint and campgrounds endpoint
+- Search will make GET request to NPS's API parks endpoint and campgrounds endpoint
 - User can select a state from a dropdown menu
 - User has option to enter a search term to narrow down the selection
 - Search will trigger a list of all the national parks in that state
