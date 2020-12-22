@@ -11,9 +11,8 @@ function formatSearchParams(params) {
   return queryItems.join('&');
 }
 
-// create address template to pass through displayParks, taking into account if there is no address in the responseJson data
+// create address template for parks, taking into account if there is no address in the responseJson data
 function addressTemplate(data) {
-
   let line1 = '';
   let city = '';
   let stateCode = '';
@@ -46,7 +45,7 @@ function displayParksResults(responseJson) {
 
   console.log(responseJson);
 
-  // display total parks to display from API
+  // total parks to display from API
   $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
   for (let i = 0; i < responseJson.data.length; i++) {
@@ -102,30 +101,19 @@ function displayCampgrounds(responseJson, parkCode) {
 
     $(`#camps-list-${parkCode}`).append(
       `<li>
-
         ${responseJson.data[i].url !== '' ? `<h3><a href="${responseJson.data[i].url}" target="_blank">${responseJson.data[i].name}</a></h3>` : `<h3>${responseJson.data[i].name}</h3>`}
-
         <h4 class="num-of-campgrounds">Campground ${i+1} of ${responseJson.data.length}</h4>
-
         <div class="img-container">
           ${responseJson.data[i].images.length > 0 ? `<img class="camp-img" src="${responseJson.data[i].images[0].url}" alt="${responseJson.data[i].images[0].altText}">` : `<img class="no-image" src="images/no-image-available-icon.jpg" alt="no image available">`}
         </div>
-
         <h4>Description:</h4>
           <p>${responseJson.data[i].description}</p> 
-
         <h4>Total Campsites: </h4> 
           <p>${responseJson.data[i].campsites.totalSites}</p>
-
         <h4>Directions Information:</h4>
-
           ${responseJson.data[i].directionsOverview !== '' ? `<p>${responseJson.data[i].directionsOverview}</p>` : `<p>No directions information available.</p>`}
-
         <h4>Reservation Information:</h4>
-          
-
           ${responseJson.data[i].reservationInfo !== '' ? `<p>${responseJson.data[i].reservationInfo}</p>` : `<p>No reservation information available.</p>`}
-
       </li>`
     );
   };
@@ -162,7 +150,7 @@ function getParks(stateCode, searchTerm) {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
   $('#results').removeClass('hidden');
-};
+}
 
 
 // get campgrounds information from camps API 
@@ -218,7 +206,7 @@ function toggleCampgrounds(parkCode) {
 // hide or show scroll to top button
 function handleScrollToTopBtn() {
   $(window).scroll(function() {
-    if ($(this).scrollTop() > 500) {
+    if ($(this).scrollTop() > 300) {
       $('#scroll-to-top-btn').show();
     } else {
       $('#scroll-to-top-btn').hide();
@@ -228,12 +216,9 @@ function handleScrollToTopBtn() {
 
 // handle form submission (Show Parks)
 function handleForm() {
-  
   $('form').submit(event => {
     event.preventDefault();
-
     const stateCode = $('#js-states-list').val();
-
     const searchTerm = $('#js-search-term').val().toLowerCase();
     getParks(stateCode, searchTerm);
   });
