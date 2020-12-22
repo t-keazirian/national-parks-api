@@ -6,9 +6,9 @@ Assignment:
 
 API Hack Capstone
 
-- Search will trigger first to NPS's parks API, then to campgrounds API
+- Search will make GEt request NPS's API, parks endpoint and campgrounds endpoint
 - User can select a state from a dropdown menu
-- User has option enter a search term to narrow down the selection
+- User has option to enter a search term to narrow down the selection
 - Search will trigger a list of all the national parks in that state
 - Once parks are loaded, user can click "show campgrounds" button to display all the campgrounds available for that park
 

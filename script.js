@@ -74,6 +74,7 @@ function displayParksResults(responseJson) {
     };
   $('#results').removeClass('hidden');
   handleCampBtn();
+  handleScrollToTopBtn();
 }
 
 // HTML to render in DOM to display all campgrounds info corresponding to each park (display underneath park info)
@@ -192,11 +193,12 @@ function getCampgrounds(parkCode) {
 
 // handle "show campgrounds" button click
 function handleCampBtn() {
-  $('.camp-btn').one('click', function() {
+  $('.camp-btn').one('click', function(event) {
     const parkCode = $(this).attr("value");
 
     getCampgrounds(parkCode);
     toggleCampgrounds(parkCode);
+    $(event.currentTarget).text('Hide Campgrounds');
   });
 }
 
@@ -205,14 +207,23 @@ function toggleCampgrounds(parkCode) {
     
     if ($(`#campgrounds-${parkCode}`).hasClass('hidden')) {
       $(`#campgrounds-${parkCode}`).removeClass('hidden');
-      // $(`#camp-btn-${parkCode}`).text('Hide Campgrounds');
       $(event.currentTarget).text('Hide Campgrounds');
     } else {
       $(`#campgrounds-${parkCode}`).addClass('hidden');
-      // $(`#camp-btn-${parkCode}`).text('Show Campgrounds');
       $(event.currentTarget).text('Show Campgrounds');
     }
   })
+}
+
+// hide or show scroll to top button
+function handleScrollToTopBtn() {
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 500) {
+      $('#scroll-to-top-btn').show();
+    } else {
+      $('#scroll-to-top-btn').hide();
+    }
+  });
 }
 
 // handle form submission (Show Parks)

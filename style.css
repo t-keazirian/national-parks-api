@@ -176,6 +176,7 @@ button:hover, .submit-button:hover {
 }
 
 #scroll-to-top-btn {
+  display: none;
   position: fixed;
   right: 10px;
   bottom: 10px;
