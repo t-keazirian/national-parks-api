@@ -1,5 +1,9 @@
 # national-parks-api
 
+Screenshot:
+
+<img src="images/Screen Shot 2020-12-22 at 1.35.33 PM.png" alt="Screenshot of App"/>
+
 https://t-keazirian.github.io/national-parks-api/
 
 Assignment:
