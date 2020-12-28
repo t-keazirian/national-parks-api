@@ -44,7 +44,6 @@ html {
   border-style: solid;
   margin: 10px;
   border-radius: 10px;
-  text-align: justify;
 }
 
 .search-form {
@@ -73,7 +72,6 @@ html {
   border-radius: 10px;
   min-height: 100%;
   margin: 10px;
-  text-align: justify;
 }
 
 .item {
@@ -144,7 +142,7 @@ li {
   width: 120px;
 }
 
-.search-term {
+#search-term {
   width: 100px;
 }
 

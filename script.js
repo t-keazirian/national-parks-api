@@ -43,8 +43,6 @@ function addressTemplate(data) {
 function displayParksResults(responseJson) {
   $('#results-list').empty();
 
-  console.log(responseJson);
-
   // total parks to display from API
   $('#search-header').html(`<p id="total-parks">Total Parks: ${responseJson.total}</p>`);
 
@@ -78,12 +76,8 @@ function displayParksResults(responseJson) {
 
 // HTML to render in DOM to display all campgrounds info corresponding to each park (display underneath park info)
 function displayCampgrounds(responseJson, parkCode) {
-  console.log(`displayCampgrounds ran`);
-  console.log(responseJson);
 
   let total = responseJson.total;
-
-  console.log(total);
 
   if (total === "0") {
     let noCamps = '';
@@ -136,8 +130,6 @@ function getParks(stateCode, searchTerm) {
 
   let parksUrl = searchURL + 'parks?' + queryString;
 
-  console.log(parksUrl); 
-
   fetch(parksUrl)
     .then(response => {
       if (response.ok) {
@@ -163,8 +155,6 @@ function getCampgrounds(parkCode) {
   const campQueryString = formatSearchParams(campParams)
 
   let campsUrl = searchURL + 'campgrounds?' + campQueryString;
-
-  console.log(campsUrl);
 
   fetch(campsUrl)
     .then(response => {
@@ -219,7 +209,7 @@ function handleForm() {
   $('form').submit(event => {
     event.preventDefault();
     const stateCode = $('#js-states-list').val();
-    const searchTerm = $('#js-search-term').val().toLowerCase();
+    const searchTerm = $('#search-term').val().toLowerCase();
     getParks(stateCode, searchTerm);
   });
 }
@@ -236,7 +226,6 @@ function scrollToTopBtnClick() {
 
 // call back function
 $(function() {
-  console.log('App has loaded. Waiting for click!');
   scrollToTopBtnClick();
   handleForm();
 })

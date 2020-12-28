@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>National Park and Campgrounds Finder</title>
-    <link rel="shortcut icon" href="">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
     type="text/css">
     <link rel="stylesheet" href="style.css">
@@ -38,8 +37,8 @@
   
         <form id="js-form" class="search-form">
   
-          <label for="state-code">Choose a state below:</label>
-          <select name="state-code" class="state-dropdown" id="js-states-list">
+          <label for="js-states-list">Choose a state below:</label>
+          <select class="state-dropdown" id="js-states-list">
   
             <option value="al">Alabama</option>
             <option value="ak">Alaska</option>
@@ -96,7 +95,7 @@
           </select>
           
           <label for="search-term">Search Term (optional)</label>
-          <input type="text" name="search-term" id="js-search-term" class="search-term">
+          <input type="text" name="search-term" id="search-term">
           
           <input type="submit" value="Show Me My Parks!" class="submit-button">
         
